@@ -1,5 +1,18 @@
 version: 2.1
-        
+
+orbs:
+  slack: circleci/slack@4.9.3
+
+
+# commands
+commands:
+  notify_on_failure:
+    steps:
+      event: fail
+      channel: 'devops-fwd-project3-notifications'
+      mentions: '@Ahmed Halaby'
+      template: basic_fail_1
+
 # jobs
 jobs:
   # build frontend 
@@ -19,6 +32,8 @@ jobs:
       - save_cache:
           paths: [frontend/node_modules]
           key: frontend-build
+      - notify_on_failure
+
   # build backend 
   build-backend:
     docker:
@@ -36,6 +51,8 @@ jobs:
       - save_cache:
           paths: [backend/node_modules]
           key: backend-build
+      - notify_on_failure
+
   # test frontend
   test-frontend:
     docker:
@@ -50,6 +67,8 @@ jobs:
             cd frontend
             npm install
             npm test
+      - notify_on_failure
+
   # test backend
   test-backend:
     docker:
@@ -64,6 +83,8 @@ jobs:
             cd backend
             npm install
             npm test  
+      - notify_on_failure
+
   # scan frontend
   scan-frontend:
     docker:
@@ -82,6 +103,8 @@ jobs:
             npm audit fix --force --audit-level=critical
             # end workaround fix
             npm audit --audit-level=critical
+      - notify_on_failure
+
   # scan backend
   scan-backend:
     docker:
@@ -100,7 +123,21 @@ jobs:
             npm audit fix --force --audit-level=critical
             npm update path-parse --depth 3
             # end workaround fix
-            npm audit --audit-level=critical            
+            npm audit --audit-level=critical
+      - notify_on_failure   
+
+  # notify on success
+  notify_on_success:
+    docker:
+      - image: cimg/base:stable
+    steps:
+      - slack/notify:
+        event: pass
+        channel: 'devops-fwd-project3-notifications'
+        mentions: '@Ahmed Halaby'
+        template: success_tagged_deployment_1
+
+
 
 # workflows
 workflows:
@@ -116,3 +153,6 @@ workflows:
           requires: [build-backend]
       - scan-frontend:
           requires: [build-frontend]
+      - notify_on_success:
+        require: 
+          - ""
