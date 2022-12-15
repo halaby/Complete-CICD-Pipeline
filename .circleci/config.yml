@@ -10,8 +10,7 @@ commands:
     steps:
       - slack/notify:
           event: fail
-          channel: 'devops-fwd-project3-notifications'
-          mentions: '@Ahmed Halaby'
+          channel: devops-fwd-project3-notifications
           template: basic_fail_1
 
 # jobs
@@ -135,8 +134,7 @@ jobs:
     steps:
       - slack/notify:
           event: pass
-          channel: 'devops-fwd-project3-notifications'
-          mentions: '@Ahmed Halaby'
+          channel: devops-fwd-project3-notifications
           template: success_tagged_deploy_1
 
 
