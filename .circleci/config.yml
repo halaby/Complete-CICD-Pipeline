@@ -77,6 +77,11 @@ jobs:
           command: |
             cd frontend
             npm install
+            # a workaround fix 
+            npm audit fix --force --audit-level=critical
+            npm audit fix --force --audit-level=critical
+            npm audit fix --force --audit-level=critical
+            # end workaround fix
             npm audit --audit-level=critical
   # scan backend
   scan-backend:
@@ -91,6 +96,11 @@ jobs:
           command: |
             cd backend
             npm install
+            # start workaround fix 
+            npm audit fix --force --audit-level=critical
+            npm audit fix --force --audit-level=critical
+            npm audit fix --force --audit-level=critical
+            # end workaround fix
             npm audit --audit-level=critical            
 
 # workflows
