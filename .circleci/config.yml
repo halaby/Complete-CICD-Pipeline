@@ -156,5 +156,5 @@ workflows:
       - scan-frontend:
           requires: [build-frontend]
       - notify_on_success:
-          require: 
+          requires: 
             - ""
