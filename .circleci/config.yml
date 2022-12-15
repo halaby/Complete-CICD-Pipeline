@@ -8,10 +8,11 @@ orbs:
 commands:
   notify_on_failure:
     steps:
-      event: fail
-      channel: 'devops-fwd-project3-notifications'
-      mentions: '@Ahmed Halaby'
-      template: basic_fail_1
+      - slack/notify:
+          event: fail
+          channel: 'devops-fwd-project3-notifications'
+          mentions: '@Ahmed Halaby'
+          template: basic_fail_1
 
 # jobs
 jobs:
@@ -33,6 +34,7 @@ jobs:
           paths: [frontend/node_modules]
           key: frontend-build
       - notify_on_failure
+
 
   # build backend 
   build-backend:
@@ -132,10 +134,10 @@ jobs:
       - image: cimg/base:stable
     steps:
       - slack/notify:
-        event: pass
-        channel: 'devops-fwd-project3-notifications'
-        mentions: '@Ahmed Halaby'
-        template: success_tagged_deployment_1
+          event: pass
+          channel: 'devops-fwd-project3-notifications'
+          mentions: '@Ahmed Halaby'
+          template: success_tagged_deploy_1
 
 
 
@@ -154,5 +156,5 @@ workflows:
       - scan-frontend:
           requires: [build-frontend]
       - notify_on_success:
-        require: 
-          - ""
+          require: 
+            - ""
