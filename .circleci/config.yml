@@ -5,7 +5,7 @@ jobs:
   # build frontend 
   build-frontend:
     docker:
-      - image: cimage/node:13.8.0
+      - image: circleci/node:13.8.0
     steps:
       - checkout
       - restore_cache:
@@ -22,7 +22,7 @@ jobs:
   # build backend 
   build-backend:
     docker:
-      - image: cimage/node:13.8.0
+      - image: circleci/node:13.8.0
     steps:
       - checkout
       - restore_cache:
@@ -36,7 +36,7 @@ jobs:
       - save_cache:
           paths: [backend/node_modules]
           key: backend-build
-          
+
 # workflows
 workflows:
   default:
