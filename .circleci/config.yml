@@ -1,5 +1,5 @@
 version: 2.1
-
+        
 # jobs
 jobs:
   # build frontend 
@@ -36,6 +36,37 @@ jobs:
       - save_cache:
           paths: [backend/node_modules]
           key: backend-build
+  # test frontend
+  test-frontend:
+    docker:
+      - image: cimg/node:13.8.0
+    steps:
+      - checkout
+      - restore_cache:
+          keys: [frontend-build]
+      - run:
+          name: frontend unit test
+          command: |
+            cd frontend
+            npm install
+            npm test
+  # test backend
+  test-backend:
+    docker:
+      - image: cimg/node:13.8.0
+    steps:
+      - checkout
+      - restore_cache:
+          keys: [backend-build]
+      - run:
+          name: backend unit test
+          command: |
+            cd backend
+            npm install
+            npm test
+      - save_cache:
+          paths: [backend/node_modules]
+          key: backend-build   
 
 # workflows
 workflows:
@@ -43,3 +74,7 @@ workflows:
     jobs:
       - build-frontend
       - build-backend
+      - test-frontend:
+          requires: [build-frontend]
+      - test-backend:
+          requires: [build-backend]
