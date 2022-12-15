@@ -120,9 +120,9 @@ jobs:
             cd backend
             npm install
             # start workaround fix 
-            npm audit fix --force --audit-level=critical
-            npm audit fix --force --audit-level=critical
-            npm update path-parse --depth 3
+            #npm audit fix --force --audit-level=critical
+            #npm audit fix --force --audit-level=critical
+            #npm update path-parse --depth 3
             # end workaround fix
             npm audit --audit-level=critical
       - notify_on_failure   
