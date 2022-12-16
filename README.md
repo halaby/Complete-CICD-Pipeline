@@ -1,7 +1,6 @@
 
 ## Project 3 - Give your Application Auto-Deploy Superpowers
 
-TODO
 
 ### Built With
 
