@@ -40,7 +40,7 @@ commands:
   destroy-environment:
     description: Destroy back-end and front-end cloudformation stacks given a workflow ID.
     parameters:
-      WorkflowID:
+      Workflow_ID:
         type: string
         default: ${CIRCLE_WORKFLOW_ID:0:7}  
     steps:
@@ -257,7 +257,7 @@ jobs:
             ansible-playbook -i inventory.txt configure-server.yml
       - destroy-environment
       - notify_on_failure  
-      
+
   # run migration
   run-migrations:
     docker:
