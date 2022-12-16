@@ -215,6 +215,26 @@ jobs:
       - destroy-environment
       - notify_on_failure
 
+  # configure-infrastructure    
+  configure-infrastructure:
+    docker:
+       - image: cimg/base:stable
+    steps:
+      - checkout
+      - install_ansible
+      - add_ssh_keys:
+          fingerprints: ["36:ef:c8:a4:f2:fb:41:83:6e:d6:66:9f:52:54:ea:fe"]
+      - attach_workspace:
+          at: ~/
+      - run:
+          name: configure server
+          command: |
+            cd .circleci/ansible
+            cat inventory.txt
+            ansible-playbook -i inventory.txt configure-server.yml
+      - destroy-environment
+      - notify_on_failure  
+
 # workflows
 workflows:
   default:
@@ -234,6 +254,8 @@ workflows:
           filters:
             branches:
               only: [main]
+      - configure-infrastructure:
+          requires: [deploy-infrastructure]
       - notify_on_success:
           requires: 
             - build-frontend
