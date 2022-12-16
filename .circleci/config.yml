@@ -1,19 +1,19 @@
 version: 2.1
 
+# orbs
 orbs:
   slack: circleci/slack@4.9.3
 
-
 # commands
 commands:
-# slack notifications
+  # slack notifications
   notify_on_failure:
     steps:
       - slack/notify:
           event: fail
           channel: devops-fwd-project3-notifications
           template: basic_fail_1
-# install awscli 
+  # install awscli 
   install_awscli:
     description: install aws cli
     steps:
@@ -23,7 +23,7 @@ commands:
             curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
             unzip awscliv2.zip
             sudo ./aws/install
-# install ansible
+  # install ansible
   install_ansible:
     description: install ansible
     steps:
@@ -50,7 +50,7 @@ commands:
             aws cloudformation delete-stack --stack-name "udapeople-backend-<< parameters.WorkflowID >>"
             aws cloudformation delete-stack --stack-name "udapeople-frontend-<< parameters.WorkflowID >>"
 
-            
+
 # jobs
 jobs:
   # build frontend 
