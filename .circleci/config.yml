@@ -23,6 +23,7 @@ commands:
             curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
             unzip awscliv2.zip
             sudo ./aws/install
+
   # install ansible
   install_ansible:
     description: install ansible
@@ -34,6 +35,7 @@ commands:
             sudo apt install software-properties-common
             sudo add-apt-repository --yes --update ppa:ansible/ansible
             sudo apt install ansible
+
   # destroy env           
   destroy-environment:
     description: Destroy back-end and front-end cloudformation stacks given a workflow ID.
@@ -46,9 +48,9 @@ commands:
           name: Destroy environments
           when: on_fail
           command: |
-            aws s3 rm "s3://udapeople-<< parameters.WorkflowID >>" --recursive
-            aws cloudformation delete-stack --stack-name "udapeople-backend-<< parameters.WorkflowID >>"
-            aws cloudformation delete-stack --stack-name "udapeople-frontend-<< parameters.WorkflowID >>"
+            aws s3 rm "s3://udapeople-${CIRCLE_WORKFLOW_ID:0:7}" --recursive
+            aws cloudformation delete-stack --stack-name "udapeople-backend-${CIRCLE_WORKFLOW_ID:0:7}"
+            aws cloudformation delete-stack --stack-name "udapeople-frontend-${CIRCLE_WORKFLOW_ID:0:7}"
 
 
 # jobs
