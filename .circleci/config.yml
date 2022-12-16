@@ -265,3 +265,4 @@ workflows:
             - scan-frontend
             - scan-backend
             - deploy-infrastructure
+            - configure-infrastructure
