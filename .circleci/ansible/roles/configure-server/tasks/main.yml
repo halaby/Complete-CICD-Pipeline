@@ -1,0 +1,21 @@
+- name: "download node.js"
+  become: true
+  shell: |
+    curl -sL https://deb.nodesource.com/setup_13.x | sudo -E bash -
+
+- name: "install node.js"
+  become: true
+  apt: 
+    name: ["nodejs"]
+    state: latest
+    update_cache: yes
+
+- name: "install PM2"
+  npm:
+    name: pm2
+    global: yes
+
+
+
+
+# VS Code Extension Version: 1.4.0
