@@ -1,0 +1,13 @@
+[URLS]
+
+    [URL01]
+        # Public git repository URL
+        https://github.com/halaby/devops-udapeople-project-cicd
+
+
+    [URL02]
+        # Udapeople S3 Website URL
+        http://udapeople-f4f2d93.s3-website-us-east-1.amazonaws.com/
+	
+	# Udapeople ClourFront URL 
+	http://d1dfms68rwnoun.cloudfront.net 
