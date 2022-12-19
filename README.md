@@ -1,6 +1,7 @@
 
 ## Project 3 - Give your Application Auto-Deploy Superpowers
-   My graduation project for AWS Cloud devOps course at Udacity
+   My graduation project for **AWS Cloud DevOps** course at Udacity Nanodegree Program (https://www.udacity.com/course/cloud-dev-ops-nanodegree--nd9991)
+
 
 ### Built With
 
